@@ -1,0 +1,51 @@
+spring:
+  #静态资源处理
+  resources:
+    #启动默认静态资源处理，默认启用
+    chain:
+      #启用h5应用缓存，默认禁用
+      html-application-cache: true
+  thymeleaf:
+    cache: false
+
+  redis:
+    host: 192.168.2.195
+    port: 6379
+    database: 0
+    timeout: 10000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: 10000ms
+        max-idle: 200
+        min-idle: 5
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+    hikari:
+      pool-name: DateHikariCP
+      minimum-idle: 5
+      idle-timeout: 180000
+      auto-commit: true
+      connection-test-query: SELECT 1
+  web:
+    resources:
+      static-locations: classpath:/static/
+      add-mappings: true
+      cache:
+        cachecontrol:
+          max-age: 3600
+      chain:
+        cache: true
+        enabled: true
+        compressed: true
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  type-aliases-package: com.example.seckill.pojo
+logging:
+  level:
+    com.example.seckill.mapper: debug
+
